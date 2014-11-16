@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GUIassignmentPrototype</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
+    <string name="Name">Name</string>
+    <string name="Job">Job</string>
+    <string name="Age">Age</string>
+    <string name="TotalAmount">TotalAmount</string>
+    <string name="emailAddress">emailAddress</string>
+    <string name="Submit">Submit</string>
+    <string name="Checkout">Checkout</string>
+	
+    <string-array name="jobtitles">
+        <item>Teacher</item>
+        <item>Postal Worker</item>
+        <item>Garda</item>
+        <item>Scientist</item>
+        <item>Artist</item>
+        <item>Psychologist</item>
+        <item>Athlete</item>
+        <item>Astronaut</item>
+        <item>Factory Dreg</item>
+        <item>Stock Broker</item>
+        <item>Hypnotist</item>
+        <item>Other</item>
+    </string-array>
+</resources>
