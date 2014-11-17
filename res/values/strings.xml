@@ -29,4 +29,44 @@
         <item>Hypnotist</item>
         <item>Other</item>
     </string-array>
+    
+    <string-array name="items">
+        <item>Toilet Paper</item>
+        <item>Vodka</item>
+        <item>Butter</item>
+        <item>Bread</item>
+        <item>Mince</item>
+        <item>Coffee</item>
+        <item>Milk</item>
+        <item>Cabbage</item>
+        <item>Cuccumber</item>
+        <item>Potatoe</item>
+        <item>Onions</item>
+        <item>Ketchup</item>
+        <item>Soap</item>
+        <item>Toothpaste</item>
+        <item>Razors</item>
+        <item>Underwear</item>
+        <item>Shirt</item>
+    </string-array>
+    
+    <string-array name="prices">
+        <item>10.00</item>
+        <item>18.00</item>
+        <item>2.00</item>
+        <item>0.68</item>
+        <item>3.99</item>
+        <item>2.59</item>
+        <item>1.49</item>
+        <item>0.49</item>
+        <item>0.39</item>
+        <item>1.49</item>
+        <item>0.69</item>
+        <item>0.79</item>
+        <item>1.19</item>
+        <item>0.39</item>
+        <item>5.29</item>
+        <item>9.99</item>
+        <item>14.99</item>
+    </string-array>
 </resources>

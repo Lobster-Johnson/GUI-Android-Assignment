@@ -2,6 +2,8 @@ package com.example.guiassignmentprototype;
 
 
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,9 +26,37 @@ public class ListActivity extends LoginActivity {
         ListView lv = (ListView)findViewById(R.id.shopping_list);
         
         //contents of the list by title
-        String[] items = {"potato", "drink", "meat", "veg", "fruit"};
-        Float[] prices = {5.50f, 2.30f, 8.00f, 1.50f, 2.40f};
+        final String[] items = getResources().getStringArray(R.array.items);
+        final String[] prices = getResources().getStringArray(R.array.prices);
         
+        
+        
+      //custom adapter code goes here--------------------------------------------------------------------------------------
+        class MyCustomAdapter extends ArrayAdapter
+    	{ 
+    	// Constructor for MyCustomAdapter will call super constructor (of Array    Adapter)
+    	public MyCustomAdapter(Context context, int textViewResourceId, String[] objects) 
+    	 {
+    		 super(context, textViewResourceId, objects);
+    			 
+    	 }
+    	 // Then.. Override the getView() method – which is used EACH time that a row is inflated on the list
+    	public View getView(int position, View convertView, ViewGroup parent) 
+    	{
+    			//Get a layout inflater object:
+    			 LayoutInflater inflater=getLayoutInflater();
+    			 View row=inflater.inflate(R.layout.item_row, parent, false);
+    			 //take current position of array and populate row
+    			 
+    			 TextView words = (TextView) row.findViewById(R.id.text1);
+    			 TextView words2 = (TextView) row.findViewById(R.id.text2);
+    			 words.setText(items[position]);
+    			 words2.setText(prices[position]);
+    			 
+    			return row;
+    	      
+    	   } // end of custom adapter----------------------------------------------------------------------------
+    	}
         
         
         //receive incoming data
@@ -45,7 +76,8 @@ public class ListActivity extends LoginActivity {
         txtMoney.setText(money);
         
         //create list
-        ArrayAdapter<String> shoppinglist = new ArrayAdapter<String>(this, R.layout.item_row, R.id.text1,items);
+        //ArrayAdapter<String> shoppinglist = new ArrayAdapter<String>(this, R.layout.item_row, R.id.text1,items);
+        MyCustomAdapter shoppinglist = new MyCustomAdapter(this, R.layout.item_row, items);
 
         lv.setAdapter(shoppinglist);
         
@@ -70,10 +102,10 @@ public class ListActivity extends LoginActivity {
         	}
         });
         
- 
+        
     }
     
-    //custom adapter code goes here
+    
     
 
 
