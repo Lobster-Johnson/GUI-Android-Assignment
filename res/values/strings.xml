@@ -13,6 +13,7 @@
     <string name="emailAddress">emailAddress</string>
     <string name="Submit">Submit</string>
     <string name="Checkout">Checkout</string>
+    <string name="Budget">Budget</string>
 	
     <string-array name="jobtitles">
         <item>Teacher</item>

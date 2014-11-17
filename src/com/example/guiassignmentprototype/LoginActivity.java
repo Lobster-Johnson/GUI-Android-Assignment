@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class LoginActivity extends Activity 
@@ -26,6 +27,8 @@ public class LoginActivity extends Activity
         final TextView totalAmount = (TextView) findViewById(R.id.money);
         Button submit = (Button) findViewById(R.id.submit_button);
         
+        final String error = "Please enter a username and a budget";
+        
         //create and populate spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.jobtitles, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -38,12 +41,23 @@ public class LoginActivity extends Activity
         	//the name and budget of the user are passed
         	public void onClick(View v) 
         	{
-        		Intent listScreen = new Intent(getApplicationContext(), ListActivity.class);
-        		listScreen.putExtra("name", txtName.getText().toString());
-        		listScreen.putExtra("amount", totalAmount.getText().toString());
+        		if((txtName.getText().toString()).matches("") || (totalAmount.getText().toString()).matches(""))
+        		{
+        			//Note: need to implement warning if these crucial fields haven't been filled out
+        			return;
         		
-        		startActivity(listScreen);
-        		finish();
+        		}
+        		else
+        		{
+        			//not my code
+	        		Intent listScreen = new Intent(getApplicationContext(), ListActivity.class);
+	        		listScreen.putExtra("name", txtName.getText().toString());
+	        		listScreen.putExtra("amount", totalAmount.getText().toString());
+	        		
+	        		startActivity(listScreen);
+	        		finish();
+	        		//end of not my code
+        		}
         	}
         });
     }

@@ -15,7 +15,8 @@
         android:layout_alignParentLeft="true"
         android:ems="10"
         android:hint="@string/Name"
-        android:inputType="textCapWords" >
+        android:inputType="textCapWords"
+        android:gravity="center" >
 
         <requestFocus />
     </EditText>
@@ -24,9 +25,9 @@
        android:id="@+id/radioGroup1"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/editText1"
        android:layout_below="@+id/editText4"
-       android:orientation="horizontal" >
+       android:orientation="horizontal"
+       android:gravity="center" >
 
         <RadioButton
             android:id="@+id/radio0"
@@ -50,7 +51,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/username"
         android:ems="10"
-        android:hint="@string/Job" />
+        android:hint="@string/Job"
+        android:gravity="center" />
 
     <EditText
         android:id="@+id/editText2"
@@ -60,7 +62,8 @@
         android:layout_below="@+id/jobselecter"
         android:ems="10"
         android:inputType="number"
-        android:hint="@string/Age" />
+        android:hint="@string/Age"
+        android:gravity="center" />
 
     <EditText
         android:id="@+id/money"
@@ -70,7 +73,8 @@
         android:layout_below="@+id/editText2"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="@string/TotalAmount" />
+        android:hint="@string/Budget"
+        android:gravity="center" />
     <EditText
         android:id="@+id/editText4"
         android:layout_width="match_parent"
@@ -79,7 +83,8 @@
         android:layout_below="@+id/money"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="@string/emailAddress"  />
+        android:hint="@string/emailAddress"
+        android:gravity="center"  />
 
     <Button
         android:id="@+id/submit_button"

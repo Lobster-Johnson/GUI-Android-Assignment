@@ -2,9 +2,12 @@ package com.example.guiassignmentprototype;
 
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -62,12 +65,13 @@ public class ListActivity extends LoginActivity {
         		//be sure to remove this
         		finalScreen.putExtra("name", txtName.getText().toString());
         		
+        		//still an error preventing me from getting to last screen
         		startActivity(finalScreen);
-        		finish();
         	}
         });
  
     }
+    
 
 
 }
