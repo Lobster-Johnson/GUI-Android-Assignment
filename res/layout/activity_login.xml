@@ -49,10 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:gravity="center"
         android:layout_below="@+id/username"
         android:ems="10"
-        android:hint="@string/Job"
-        android:gravity="center" />
+        android:hint="@string/Job" />
 
     <EditText
         android:id="@+id/editText2"

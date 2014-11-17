@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.content.Intent;
 
-public class CheckoutActivity extends ListActivity{
+public class CheckoutActivity extends LoginActivity{
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -13,7 +13,7 @@ public class CheckoutActivity extends ListActivity{
         
         //test values for screen 3
         Float testTotal = 100.00f;
-        Float Vat = testTotal/0.25f;
+        Float Vat = testTotal*0.21f;
         Float Final = testTotal + Vat;
         
         //create text views to hold values

@@ -24,7 +24,7 @@ public class ListActivity extends LoginActivity {
         
         //contents of the list by title
         String[] items = {"potato", "drink", "meat", "veg", "fruit"};
-        Float[] prices = {};
+        Float[] prices = {5.50f, 2.30f, 8.00f, 1.50f, 2.40f};
         
         
         
@@ -69,8 +69,11 @@ public class ListActivity extends LoginActivity {
         		startActivity(finalScreen);
         	}
         });
+        
  
     }
+    
+    //custom adapter code goes here
     
 
 
