@@ -44,6 +44,8 @@ public class LoginActivity extends Activity
         		if((txtName.getText().toString()).matches("") || (totalAmount.getText().toString()).matches(""))
         		{
         			//Note: need to implement warning if these crucial fields haven't been filled out
+        			Toast toast = Toast.makeText(getApplicationContext(), "Please fill out name and budget", Toast.LENGTH_SHORT);
+        			toast.show();
         			return;
         		
         		}

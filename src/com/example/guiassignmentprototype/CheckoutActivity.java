@@ -11,8 +11,13 @@ public class CheckoutActivity extends LoginActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout);
         
+        //receive incoming money
+        
+        Intent i = getIntent();
+        String money = i.getStringExtra("money");
+        
         //test values for screen 3
-        Float testTotal = 100.00f;
+        Float testTotal = Float.parseFloat(money);
         Float Vat = testTotal*0.21f;
         Float Final = testTotal + Vat;
         

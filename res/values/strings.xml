@@ -14,6 +14,8 @@
     <string name="Submit">Submit</string>
     <string name="Checkout">Checkout</string>
     <string name="Budget">Budget</string>
+    <string name="Name2">Name:	</string>
+    <string name="Budget2">Budget:	</string>
 	
     <string-array name="jobtitles">
         <item>Teacher</item>

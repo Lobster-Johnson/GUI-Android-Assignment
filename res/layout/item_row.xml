@@ -2,21 +2,46 @@
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-        <TextView 
+
+        <TextView
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity= "right" />
-        <TextView 
+            android:layout_gravity="left"
+            android:gravity="right"
+            android:text="test"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
             android:id="@+id/space"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="							"/>
-        <TextView 
+            android:layout_gravity="left"
+            android:text="							" />
+
+        <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="			$$$"/>
-        
+            android:layout_gravity="left"
+            android:text="test" />
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2" 
+            android:inputType="numberDecimal"
+            android:text = "1">
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="add" />
 
 </TableRow>
