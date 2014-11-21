@@ -31,6 +31,17 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         final String[] items = getResources().getStringArray(R.array.items);
         final String[] prices = getResources().getStringArray(R.array.prices);
         
+        
+        Global.total = 0.0f;
+        
+      //receive incoming data
+        Intent i = getIntent();
+        String name = i.getStringExtra("name");
+        String money = i.getStringExtra("amount");
+        
+      //turn money string into a float to be calculated with
+        final Float dosh = Float.valueOf(money);
+        
       //custom adapter code goes here--------------------------------------------------------------------------------------
         class MyCustomAdapter extends ArrayAdapter
     	{ 
@@ -53,6 +64,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     			 final TextView quantity = (TextView) row.findViewById(R.id.quantity);
     			 words.setText(items[position]);
     			 words2.setText(prices[position]);
+    			 Float total = 0.0f;
     			 
     			 //button to add things to the shopping cart
     			 Button add = (Button)row.findViewById(R.id.add);
@@ -62,21 +74,51 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     		        	//the name and budget of the user are passed
     		        	public void onClick(View v) 
     		        	{
-    		        		//show what it was
-    		        		//Toast toast = Toast.makeText(getApplicationContext(), words.getText().toString(), Toast.LENGTH_SHORT);
-    	        			//toast.show();
     	        			
     	        			//find total cost
     		        		Float cost = Float.valueOf(words2.getText().toString())*Float.valueOf(quantity.getText().toString());
-    		        		Toast toast = Toast.makeText(getApplicationContext(), "item: " + words.getText().toString() + " x " + quantity.getText().toString() + " Price: " + cost.toString(), Toast.LENGTH_SHORT);
-    	        			toast.show();
+    		        		
+    		        		//check to see if it doesn't go over budget
+    		        		if (Global.total + cost > dosh)
+    		        		{
+    		        			Toast toast = Toast.makeText(getApplicationContext(), "Not enough cash", Toast.LENGTH_SHORT);
+        	        			toast.show();
+    		        			
+    		        		}
+    		        		
+    		        		else
+    		        		{
+	    		        		String newitem = (words.getText().toString()) + " x " + quantity.getText().toString() + ": €" + cost.toString();
+	    		        		
+	    		        		//show the user what they added to the cart
+	    		        		Toast toast = Toast.makeText(getApplicationContext(), newitem , Toast.LENGTH_SHORT);
+	    	        			toast.show();
+	    	        			
+	    	        			//total increases
+	    	        			Global.total = Global.total + cost;
+	    	        			
+	    	        			
+	    	        			//item gets added to cart (consider a function here)
+	    	        			int x = (Global.shopping).length;
+	    	        			String[] temp = new String[x];
+	    	        			
+	    	        			for(int y = 0; y < x; y++)
+	    	        			{
+	    	        				temp[y] = Global.shopping[y];
+	    	        			}
+	    	        			
+	    	        			x++;
+	    	        			Global.shopping = new String[x];
+	    	        			
+	    	        			Global.shopping[x-1] = newitem;
+	    	        			for(int y = 0; y < temp.length; y++)
+	    	        			{
+	    	        				Global.shopping[y] = temp[y];
+	    	        			}
+    		        		}
     	        			
-    	        			//add to total
-    	        			
-    	        			//check if not over budget
-    	        			
-    	        			//add to cart
     		        	}
+
     		        });
     		        
     			 
@@ -86,14 +128,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     	}
         
         
-        //receive incoming data
-        Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        String money = i.getStringExtra("amount");
         
-      //turn money string into a float to be calculated with
-        Float dosh = Float.valueOf(money);
-        Float total = 0.0f;
         
         //test code to make sure items are received
         final TextView txtName = (TextView) findViewById(R.id.textView1);
@@ -121,27 +156,15 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         	public void onClick(View v) 
         	{
         		Intent finalScreen = new Intent(getApplicationContext(), CheckoutActivity.class);
-        		
+        		Float safety = Global.total;
         		//be sure to remove this
-        		finalScreen.putExtra("money", txtMoney.getText().toString());
+        		//actually, replace it with code to send an array
+        		finalScreen.putExtra("money", safety.toString());
         		
         		//still an error preventing me from getting to last screen
         		startActivity(finalScreen);
         	}
         });
-        
-        /*lv.setOnClickListener(new View.OnClickListener() 
-        {
-
-			
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			    }
-				
-		});*/
         	
     }
 
@@ -151,24 +174,8 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 		// TODO Auto-generated method stub
 		
 	}
+	
     
-
-	/*@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		// TODO Auto-generated method stub
-		TextView temp = (TextView) view;
-    	Toast.makeText(this, "SHOPPING", Toast.LENGTH_SHORT).show();
-		
-	}
-    
-    /*@Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-    {
-    	TextView temp = (TextView) view;
-    	Toast.makeText(this, "SHOPPING", Toast.LENGTH_SHORT).show();
-    	
-    }*/
     
     
 
