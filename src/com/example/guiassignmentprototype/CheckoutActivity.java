@@ -19,10 +19,11 @@ public class CheckoutActivity extends LoginActivity{
         //receive incoming money
         
         Intent i = getIntent();
-        String money = i.getStringExtra("money");
+        Float testTotal = i.getFloatExtra("money", 0);
+        String[] items = i.getStringArrayExtra("items");
         
         //test values for screen 3
-        Float testTotal = Float.parseFloat(money);//Global.total;
+        //Float testTotal = Float.parseFloat(money);//Global.total;
         Float Vat = testTotal*0.21f;
         Float Final = testTotal + Vat;
         
@@ -36,9 +37,10 @@ public class CheckoutActivity extends LoginActivity{
         txtVat.setText(Vat.toString());
         txtFinal.setText(Final.toString());
         
-        //ListView lv = (ListView) findViewById(R.id.yourlist);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,Global.shopping);
-        //lv.setAdapter(adapter);
+        //display the shopping cart
+        Spinner cart = (Spinner) findViewById(R.id.cart);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+        cart.setAdapter(adapter);
         
         
         

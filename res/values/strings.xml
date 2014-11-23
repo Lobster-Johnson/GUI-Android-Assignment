@@ -16,6 +16,9 @@
     <string name="Budget">Budget</string>
     <string name="Name2">Name:	</string>
     <string name="Budget2">Budget:	</string>
+    <string name="TotalPrice">Total Price: </string>
+    <string name="VAT">VAT: </string>
+    <string name="Total">Total + VAT: </string>
 	
     <string-array name="jobtitles">
         <item>Teacher</item>

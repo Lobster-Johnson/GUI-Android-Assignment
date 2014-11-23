@@ -5,32 +5,66 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/total"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/vat"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/total"
         android:layout_below="@+id/total"
-        android:layout_marginTop="14dp"
         android:gravity="center"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/finalTotal"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/vat"
         android:layout_below="@+id/vat"
         android:gravity="center"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/total"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@+id/total"
+        android:text="@string/TotalPrice"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/vat"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="@string/VAT"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/finalTotal"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="@string/Total"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:gravity="center"
+        android:text="TextView" />
+
+    <Spinner
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3" />
 
 </RelativeLayout>
