@@ -74,4 +74,24 @@
         <item>9.99</item>
         <item>14.99</item>
     </string-array>
+    
+    <string-array name="descriptions">
+        <item>Extra soft</item>
+        <item>Extra strong</item>
+        <item>Extra....buttery</item>
+        <item>Whole grain goodness</item>
+        <item>Now with 10% less horse</item>
+        <item>The trick to surviving the morning</item>
+        <item>Dairy goodness brand milk</item>
+        <item>We made sure to check them for insects</item>
+        <item>Cuccumber</item>
+        <item>Potatoe</item>
+        <item>Im sure theyd cry if they had to slice YOU up</item>
+        <item>Dont ever call it red sauce</item>
+        <item>Soap</item>
+        <item>Not the kind you use, though</item>
+        <item>Razors</item>
+        <item>We only have 1 size</item>
+        <item>Now in 1 stylish colours: magenta</item>
+    </string-array>
 </resources>

@@ -82,7 +82,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     	        			
     	        			//find total cost
     		        		Float price = Float.valueOf(words2.getText().toString());
-    		        		Float quant = Float.valueOf(quantity.getText().toString());
+    		        		int quant = Integer.valueOf(quantity.getText().toString());
     		        		Float cost = price * quant;
     		        		
     		        		//test to make sure the user gave a quantity
@@ -102,6 +102,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     		        		
     		        		else
     		        		{
+    		        			//begin adding the new item to the cart
 	    		        		String newitem = (words.getText().toString()) + " x " + quantity.getText().toString() + ": €" + cost.toString();
 	    		        		
 	    		        		//show the user what they added to the cart
@@ -124,15 +125,16 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 	    	        				String[] test2 = newitem.split(" ");
 	    	        				if(test[0].equals(test2[0]))
 	    	        				{
-	    	        					Toast war = Toast.makeText(getApplicationContext(), "YUP, got a duplicate here", Toast.LENGTH_SHORT);
-	    	    	        			war.show();
+	    	        					
 	    	        					duplicate = true;
-	    	        					//Global.shopping[z] = addToPreExisting(newitem, olditem);
+	    	        					Global.shopping[z] = addToPreExisting(newitem, olditem);
 	    	        				}
 	    	        			}
 	    	        			
 	    	        			if(duplicate == false)
 	    	        			{
+	    	        				
+		    	        			
 		    	        			//temp array to hold contents of array
 		    	        			String[] temp = new String[x];
 		    	        			
@@ -152,7 +154,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 		    	        				Global.shopping[y] = temp[y];
 		    	        			}
 	    	        			}
-    		        		}
+    		        		}//item should now be in the cart
     	        			
     		        	}
     		        	
@@ -160,8 +162,8 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 						private String addToPreExisting(String newitem, String olditem) 
 						{
 							// split string apart
-							String[] newArray = newitem.split(" |€|:");
-							String[] oldArray = olditem.split(" |€|:");	
+							String[] newArray = newitem.split(" |: €");
+							String[] oldArray = olditem.split(" |: €");	
 							
 							//reminder:
 							//0 is name
@@ -170,17 +172,17 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 							//3 is total
 							
 							//add quantities and totals
-							Float q1 = Float.valueOf(newArray[2]);
-							Float q2 = Float.valueOf(oldArray[2]);
-							Float q3 = q1 + q2;
+							int q1 = Integer.valueOf(newArray[2]);
+							int q2 = Integer.valueOf(oldArray[2]);
+							int q3 = q1 + q2;
 							
 							Float t1 = Float.valueOf(newArray[3]);
 							Float t2 = Float.valueOf(newArray[3]);
 							Float t3 = t1 + t2;
 							
 							//rebuild
-							String Finish = newArray[0] + " x " + q3.toString() + ": €" + t3.toString();
-							
+							String Finish = newArray[0] + " x " + Integer.toString(q3) + ": €" + t3.toString();
+							//String Finish = t3.toString();
 							//return
 							return Finish;
 						}
