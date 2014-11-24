@@ -81,6 +81,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     		        	{
     	        			
     	        			//find total cost
+    		        		String name = words.getText().toString();
     		        		Float price = Float.valueOf(words2.getText().toString());
     		        		int quant = Integer.valueOf(quantity.getText().toString());
     		        		Float cost = price * quant;
@@ -103,7 +104,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     		        		else
     		        		{
     		        			//begin adding the new item to the cart
-	    		        		String newitem = (words.getText().toString()) + " x " + quantity.getText().toString() + ": €" + cost.toString();
+	    		        		String newitem = name + " x " + quantity.getText().toString() + ": €" + cost.toString();
 	    		        		
 	    		        		//show the user what they added to the cart
 	    		        		Toast toast = Toast.makeText(getApplicationContext(), newitem , Toast.LENGTH_SHORT);
@@ -119,73 +120,52 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 	    	        			int x = (Global.shopping).length;
 	    	        			for(int z = 0; z < x; z++)
 	    	        			{
-	    	        				String olditem = null;
-	    	        				olditem = Global.shopping[z];
-	    	        				String[] test = olditem.split(" ");
-	    	        				String[] test2 = newitem.split(" ");
-	    	        				if(test[0].equals(test2[0]))
+	    	        				if(((Global.shopping[z]).name).equals(name))
 	    	        				{
-	    	        					
 	    	        					duplicate = true;
-	    	        					Global.shopping[z] = addToPreExisting(newitem, olditem);
+	    	        					(Global.shopping[z]).quantity = (Global.shopping[z]).quantity + quant;
+	    	        					(Global.shopping[z]).total = (Global.shopping[z]).total + cost;
 	    	        				}
 	    	        			}
 	    	        			
 	    	        			if(duplicate == false)
 	    	        			{
-	    	        				
-		    	        			
+	    	        			
 		    	        			//temp array to hold contents of array
-		    	        			String[] temp = new String[x];
+		    	        			ListItem[] temp = new ListItem[x];
 		    	        			
 		    	        			for(int y = 0; y < x; y++)
 		    	        			{
-		    	        				temp[y] = Global.shopping[y];
+		    	        				temp[y] = new ListItem();
+		    	        				temp[y].name = Global.shopping[y].name;
+		    	        				temp[y].quantity = Global.shopping[y].quantity;
+		    	        				temp[y].total = Global.shopping[y].total;
 		    	        			}
 		    	        			
 		    	        			//add new item to the end of the shopping list
 		    	        			//then put old items back in
 		    	        			x++;
-		    	        			Global.shopping = new String[x];
+		    	        			Global.shopping = new ListItem[x];
 		    	        			
-		    	        			Global.shopping[x-1] = newitem;
+		    	        			//according to debugging, error lies here
+		    	        			Global.shopping[x-1] = new ListItem();
+		    	        			Global.shopping[x-1].name = name;
+		    	        			Global.shopping[x-1].quantity = quant;
+		    	        			Global.shopping[x-1].total = cost;
+		    	        			
 		    	        			for(int y = 0; y < temp.length; y++)
 		    	        			{
-		    	        				Global.shopping[y] = temp[y];
+		    	        				Global.shopping[y] = new ListItem();
+		    	        				Global.shopping[y].name = temp[y].name;
+		    	        				Global.shopping[y].quantity = temp[y].quantity;
+		    	        				Global.shopping[y].total = temp[y].total;
 		    	        			}
 	    	        			}
     		        		}//item should now be in the cart
     	        			
     		        	}
     		        	
-    		        	//method for adding to an already existing item
-						private String addToPreExisting(String newitem, String olditem) 
-						{
-							// split string apart
-							String[] newArray = newitem.split(" |: €");
-							String[] oldArray = olditem.split(" |: €");	
-							
-							//reminder:
-							//0 is name
-							//1 is x
-							//2 is quantity
-							//3 is total
-							
-							//add quantities and totals
-							int q1 = Integer.valueOf(newArray[2]);
-							int q2 = Integer.valueOf(oldArray[2]);
-							int q3 = q1 + q2;
-							
-							Float t1 = Float.valueOf(newArray[3]);
-							Float t2 = Float.valueOf(newArray[3]);
-							Float t3 = t1 + t2;
-							
-							//rebuild
-							String Finish = newArray[0] + " x " + Integer.toString(q3) + ": €" + t3.toString();
-							//String Finish = t3.toString();
-							//return
-							return Finish;
-						}
+    		        	
 
     		        });
     		        
@@ -226,20 +206,17 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         		Intent finalScreen = new Intent(getApplicationContext(), CheckoutActivity.class);
         		//Float safety = Global.total;
         		
-        		/*//emergency code
+        		//emergency code
         		String[] ToCart = new String[(Global.shopping).length];
         		
-        		//create array to be passed in
-        		for(int x = 0; x < (Global.shopping).length; x++)
+        		for(int i = 0; i < ToCart.length; i++)
         		{
-        			ToCart[x] =  Global.shopping[x];
-        		}*/
-        		
+        			ToCart[i] = (Global.shopping[i]).name + " x " + Integer.toString((Global.shopping[i]).quantity) + ": €" + Float.toString((Global.shopping[i]).total); 
+        		}
         		//pass total cash and array of items
         		finalScreen.putExtra("money", Global.total);
-        		finalScreen.putExtra("items", Global.shopping);
+        		finalScreen.putExtra("items", ToCart);
         		
-        		//still an error preventing me from getting to last screen
         		startActivity(finalScreen);
         	}
         });
