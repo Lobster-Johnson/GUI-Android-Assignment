@@ -33,6 +33,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         //contents of the list by title
         final String[] items = getResources().getStringArray(R.array.items);
         final String[] prices = getResources().getStringArray(R.array.prices);
+        final String[] desc = getResources().getStringArray(R.array.descriptions);
         
         
         Global.total = 0.0f;
@@ -62,13 +63,15 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     			 LayoutInflater inflater=getLayoutInflater();
     			 View row=inflater.inflate(R.layout.item_row, parent, false);
     			 //take current position of array and populate row
-    			 
+    			 final TextView totalAm = (TextView) findViewById(R.id.total);
     			 final TextView words = (TextView) row.findViewById(R.id.text1);
     			 final TextView words2 = (TextView) row.findViewById(R.id.text2);
     			 final TextView quantity = (TextView) row.findViewById(R.id.quantity);
+    			 final TextView description = (TextView) row.findViewById(R.id.desc);
     			 //get a description here
     			 words.setText(items[position]);
     			 words2.setText(prices[position]);
+    			 description.setText(desc[position]);
     			 
     			 
     			 //button to add things to the shopping cart
@@ -112,6 +115,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 	    	        			
 	    	        			//total increases
 	    	        			Global.total = Global.total + cost;
+	    	        			totalAm.setText((Global.total).toString());
 	    	        			boolean duplicate = false;
 	    	        			
 	    	        			
@@ -181,11 +185,12 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         //test code to make sure items are received
         final TextView txtName = (TextView) findViewById(R.id.textView1);
         final TextView txtMoney = (TextView) findViewById(R.id.textView2);
+        final TextView totalAm = (TextView) findViewById(R.id.total);
         
         //display the name and budget of the user
         txtName.setText(name);
         txtMoney.setText(money);
-        
+        totalAm.setText((Global.total).toString());
         //create list
         //ArrayAdapter<String> shoppinglist = new ArrayAdapter<String>(this, R.layout.item_row, R.id.text1,items);
         MyCustomAdapter shoppinglist = new MyCustomAdapter(this, R.layout.item_row, items);
