@@ -4,9 +4,6 @@ package com.example.guiassignmentprototype;
 
 
 
-import java.util.Currency;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,19 +32,21 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         final String[] prices = getResources().getStringArray(R.array.prices);
         final String[] desc = getResources().getStringArray(R.array.descriptions);
         
-        
+        //set the starting value for the total
         Global.total = 0.0f;
         
       //receive incoming data
+        //code from http://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android
         Intent i = getIntent();
         String name = i.getStringExtra("name");
         String money = i.getStringExtra("amount");
+        //my code again
         
       //turn money string into a float to be calculated with
         final Float budget = Float.valueOf(money);
         
-        //consider adding this to a different class
-      //custom adapter code goes here--------------------------------------------------------------------------------------
+       
+        //custom adapter code goes here--------------------------------------------------------------------------------------
         class MyCustomAdapter extends ArrayAdapter
     	{ 
     	// Constructor for MyCustomAdapter will call super constructor (of Array    Adapter)
@@ -62,13 +61,15 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     			//Get a layout inflater object:
     			 LayoutInflater inflater=getLayoutInflater();
     			 View row=inflater.inflate(R.layout.item_row, parent, false);
+    			 
     			 //take current position of array and populate row
     			 final TextView totalAm = (TextView) findViewById(R.id.total);
     			 final TextView words = (TextView) row.findViewById(R.id.text1);
     			 final TextView words2 = (TextView) row.findViewById(R.id.text2);
     			 final TextView quantity = (TextView) row.findViewById(R.id.quantity);
     			 final TextView description = (TextView) row.findViewById(R.id.desc);
-    			 //get a description here
+    			 
+    			 //set values
     			 words.setText(items[position]);
     			 words2.setText(prices[position]);
     			 description.setText(desc[position]);
@@ -138,6 +139,7 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 		    	        			//temp array to hold contents of array
 		    	        			ListItem[] temp = new ListItem[x];
 		    	        			
+		    	        			//pass all items into the temp array for storage
 		    	        			for(int y = 0; y < x; y++)
 		    	        			{
 		    	        				temp[y] = new ListItem();
@@ -146,17 +148,17 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
 		    	        				temp[y].total = Global.shopping[y].total;
 		    	        			}
 		    	        			
-		    	        			//add new item to the end of the shopping list
-		    	        			//then put old items back in
+		    	        			//create the shopping cart array again
 		    	        			x++;
 		    	        			Global.shopping = new ListItem[x];
 		    	        			
-		    	        			//according to debugging, error lies here
+		    	        			//add new item to the end of the array
 		    	        			Global.shopping[x-1] = new ListItem();
 		    	        			Global.shopping[x-1].name = name;
 		    	        			Global.shopping[x-1].quantity = quant;
 		    	        			Global.shopping[x-1].total = cost;
 		    	        			
+		    	        			//copy back in all the old items
 		    	        			for(int y = 0; y < temp.length; y++)
 		    	        			{
 		    	        				Global.shopping[y] = new ListItem();
@@ -176,23 +178,24 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
     			 
     			return row;
     	      
-    	   } // end of custom adapter----------------------------------------------------------------------------
-    	}
+    	   } 
+    	}// end of custom adapter----------------------------------------------------------------------------
         
         
         
         
-        //test code to make sure items are received
+        //Create text views to display various information
         final TextView txtName = (TextView) findViewById(R.id.textView1);
         final TextView txtMoney = (TextView) findViewById(R.id.textView2);
         final TextView totalAm = (TextView) findViewById(R.id.total);
         
-        //display the name and budget of the user
+        //display the name, budget and current total
         txtName.setText(name);
         txtMoney.setText(money);
         totalAm.setText((Global.total).toString());
+        
+        
         //create list
-        //ArrayAdapter<String> shoppinglist = new ArrayAdapter<String>(this, R.layout.item_row, R.id.text1,items);
         MyCustomAdapter shoppinglist = new MyCustomAdapter(this, R.layout.item_row, items);
 
         lv.setAdapter(shoppinglist);
@@ -209,23 +212,38 @@ public class ListActivity extends LoginActivity implements AdapterView.OnItemCli
         	public void onClick(View v) 
         	{
         		Intent finalScreen = new Intent(getApplicationContext(), CheckoutActivity.class);
-        		//Float safety = Global.total;
         		
         		//emergency code
         		String[] ToCart = new String[(Global.shopping).length];
         		
+        		//take all the items in the shopping cart and turn them into strings for easy display on checkout
         		for(int i = 0; i < ToCart.length; i++)
         		{
         			ToCart[i] = (Global.shopping[i]).name + " x " + Integer.toString((Global.shopping[i]).quantity) + ": €" + Float.toString((Global.shopping[i]).total); 
         		}
+        		
         		//pass total cash and array of items
         		finalScreen.putExtra("money", Global.total);
         		finalScreen.putExtra("items", ToCart);
         		
+        		//go to checkout screen
         		startActivity(finalScreen);
         	}
         });
-        	
+        
+        //action listener for clearing list and total
+        Button clear = (Button) findViewById(R.id.clear);
+        clear.setOnClickListener(new View.OnClickListener() 
+        {
+        	//when clicked, the total and cart are cleared
+        	public void onClick(View v) 
+        	{
+        		Global.total = 0.0f;
+        		Global.shopping = new ListItem[0];
+        		totalAm.setText((Global.total).toString());
+        		
+        	}
+        });
     }
 
 	@Override

@@ -27,7 +27,6 @@ public class LoginActivity extends Activity
         final TextView totalAmount = (TextView) findViewById(R.id.money);
         Button submit = (Button) findViewById(R.id.submit_button);
         
-        final String error = "Please enter a username and a budget";
         
         //create and populate spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.jobtitles, android.R.layout.simple_spinner_item);
@@ -41,23 +40,33 @@ public class LoginActivity extends Activity
         	//the name and budget of the user are passed
         	public void onClick(View v) 
         	{
+        		//for some reason after installing a new Genymotion API, error checking no longer works
+        		//boolean flag = false;
+        		float test = Float.valueOf(totalAmount.getText().toString());
         		if((txtName.getText().toString()).matches("") || (totalAmount.getText().toString()).matches(""))
         		{
         			//Note: need to implement warning if these crucial fields haven't been filled out
         			Toast toast = Toast.makeText(getApplicationContext(), "Please fill out name and budget", Toast.LENGTH_SHORT);
         			toast.show();
+        			//flag = true;
         			return;
         		
         		}
+        		if(test <= 0)
+        		{
+        			Toast toast = Toast.makeText(getApplicationContext(), "You need a budget greater than 0", Toast.LENGTH_SHORT);
+        			toast.show();
+        			//flag = true;
+        			return;
+        		}
         		else
         		{
-        			//not my code
+        			//I got this code form http://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android
 	        		Intent listScreen = new Intent(getApplicationContext(), ListActivity.class);
 	        		listScreen.putExtra("name", txtName.getText().toString());
 	        		listScreen.putExtra("amount", totalAmount.getText().toString());
 	        		
 	        		startActivity(listScreen);
-	        		finish();
 	        		//end of not my code
         		}
         	}

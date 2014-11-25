@@ -2,18 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#C2D6FF">
+    android:background="#DDDDDD"
+    android:orientation="vertical" >
 
     <ListView
         android:id="@+id/shopping_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
         android:background="#FFFFFF"
-        android:gravity="right|center_vertical"
-        android:layout_centerHorizontal="true" >
-
+        android:gravity="right|center_vertical" >
     </ListView>
 
     <TextView
@@ -64,8 +63,19 @@
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
         android:layout_toLeftOf="@+id/checkout"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/clear"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/total"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toLeftOf="@+id/checkout"
+        android:text="@string/Clear" />
 
 </RelativeLayout>

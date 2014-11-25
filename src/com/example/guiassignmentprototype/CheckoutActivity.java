@@ -15,14 +15,13 @@ public class CheckoutActivity extends LoginActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout);
         
-        //receive incoming money
+        //receive incoming money and shopping cart items
         
         Intent i = getIntent();
         Float testTotal = i.getFloatExtra("money", 0);
         String[] items = i.getStringArrayExtra("items");
         
-        //test values for screen 3
-        //Float testTotal = Float.parseFloat(money);//Global.total;
+        //calculate values for VAT and Total
         Float Vat = testTotal*0.21f;
         Float Final = testTotal + Vat;
         
