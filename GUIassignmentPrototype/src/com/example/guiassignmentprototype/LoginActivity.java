@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+//C12474932 Marcus Daly Android Assignment
 public class LoginActivity extends Activity 
 {
 
@@ -40,15 +40,15 @@ public class LoginActivity extends Activity
         	//the name and budget of the user are passed
         	public void onClick(View v) 
         	{
-        		//for some reason after installing a new Genymotion API, error checking no longer works
-        		//boolean flag = false;
         		float test = Float.valueOf(totalAmount.getText().toString());
+        		
+        		//for some reason after installing a new Genymotion API, checking if blank no longer works
+        		//especially odd seeing how every source online says this should work
         		if((txtName.getText().toString()).matches("") || (totalAmount.getText().toString()).matches(""))
         		{
         			//Note: need to implement warning if these crucial fields haven't been filled out
         			Toast toast = Toast.makeText(getApplicationContext(), "Please fill out name and budget", Toast.LENGTH_SHORT);
         			toast.show();
-        			//flag = true;
         			return;
         		
         		}
@@ -56,7 +56,6 @@ public class LoginActivity extends Activity
         		{
         			Toast toast = Toast.makeText(getApplicationContext(), "You need a budget greater than 0", Toast.LENGTH_SHORT);
         			toast.show();
-        			//flag = true;
         			return;
         		}
         		else
@@ -68,6 +67,7 @@ public class LoginActivity extends Activity
 	        		
 	        		startActivity(listScreen);
 	        		//end of not my code
+	        		finish();
         		}
         	}
         });
